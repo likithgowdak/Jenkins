@@ -3,6 +3,13 @@ pipeline {
     environment {
         DOCKER_IMAGE = "likithgowda/jenkins-demo:latest"
     }
+
+    parameters {
+        string(name: 'APP_VERSION', defaultValue: '1.0.0', description: 'Enter your app version')
+        choice(name: 'ENVIRONMENT', choices: ['dev', 'qa', 'prod'], description: 'Select environment')
+        booleanParam(name: 'DEPLOY', defaultValue: true, description: 'Deploy after build?')
+    }
+
     stages {
         stage('Checkout') {
             steps {
